@@ -14,6 +14,10 @@ The system is designed as a modular AI microservice pipeline focusing on:
 Low latency inference
 Scalable architecture design
 Clean API-based communication
+---------------------------------
+Demo link :
+https://drive.google.com/file/d/1faP1P3IfEaFJyfyHcD6bDAiknlIq-Tsl/view?usp=sharing
+-----------------------------------------------------
 🧠 System Architecture
 Client (Image Upload)
         ↓
@@ -28,6 +32,7 @@ Grouping Service (Cosine Similarity Clustering)
 Visualization Service (OpenCV)
         ↓
 Response (JSON + Output Image)
+----------------------------------------------------------------------
 ⚙️ Technologies Used
 Python
 Flask (Backend API)
@@ -36,6 +41,8 @@ OpenAI CLIP (Feature Embeddings)
 OpenCV (Image Processing & Visualization)
 PyTorch (Deep Learning Backend)
 NumPy
+
+----------------------------------------------------------------------
 📦 Project Structure
 infelict-ai/
 │
@@ -44,6 +51,7 @@ infelict-ai/
 ├── outputs/               # Output visualized images
 ├── requirements.txt       # Dependencies
 └── README.md
+-------------------------------------------------------------------------
 🔥 AI Pipeline Breakdown
 1. Object Detection (YOLOv8)
 Model: yolov8s.pt
@@ -57,15 +65,20 @@ Output Example:
   "class_name": "book",
   "confidence": 0.92
 }
+
+
+-------------------------------------------------------------------------------------
 2. Feature Extraction (CLIP Model)
 Uses ViT-B/32 CLIP model
 Extracts semantic embeddings for each detected object crop
 Converts each object into a high-dimensional feature vector
+
 3. Product Grouping (Cosine Similarity Clustering)
 Groups visually/semantically similar objects
 Uses cosine similarity threshold (0.85)
 Assigns unique group_id to each cluster
 
+----------------------------------------------------------------------------------
 Note:
 
 In absence of a labeled FMCG dataset, CLIP-based semantic grouping is used to simulate brand-level clustering.
@@ -122,12 +135,15 @@ Output images:
 /outputs/<filename>
 🧪 How to Run the Project
 1. Install dependencies
+2. ```bash
 pip install -r requirements.txt
-2. Run Flask server
+3. Run Flask server
 python app.py
-3. Open in browser
+
+```
+4. Open in browser
 http://127.0.0.1:5000/upload
-4. API usage (Postman/cURL)
+5. API usage (Postman/cURL)
 
 Send POST request to:
 
@@ -137,35 +153,45 @@ with:
 
 key: image
 type: file
+---------------------------------------------------------------------------------------
 🧩 Key Design Decisions
 ✔ Why YOLOv8?
 Lightweight
 Fast inference
 Good general object detection performance
+------------------------------------------------------------------
 ✔ Why CLIP?
 Captures semantic similarity between objects
 Works without labeled training data
 Useful for grouping similar products
+------------------------------------------------------------------
 ✔ Why Cosine Similarity?
 Efficient for embedding comparison
 Suitable for clustering visual features
+------------------------------------------------------------------
 ⚡ Performance Considerations
 Models loaded once at startup (reduces latency)
 No repeated initialization
 Lightweight Flask server
 Local file-based caching for outputs
+
+
+------------------------------------------------
 📌 Limitations
 YOLOv8 COCO model is not trained on FMCG datasets
 Grouping is semantic, not brand-trained classification
 No distributed microservice deployment (single-node demo)
+
+-----------------------------------------------------------------
 🚀 Future Improvements
 Fine-tune YOLO on SKU-110K / retail datasets
 Replace cosine grouping with trained clustering model
 Add Redis/Celery for async processing
 Deploy using Docker + Kubernetes
 Add real-time streaming inference API
-👨‍💻 Author Notes
 
+-------------------------------------------------------------
+ Author Notes
 This system demonstrates a complete AI pipeline architecture including:
 
 Detection
